@@ -11,7 +11,7 @@ const App = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    sendFeedback("***TEMPLAYE_ID***", {
+    sendFeedback("template_izaa15i", {
       name,
       company,
       phone,
