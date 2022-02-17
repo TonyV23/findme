@@ -7,17 +7,33 @@ const App = () => {
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
+  
+  const isEmail = () =>{
+    let mail = document.getElementById("not-mail");
+    let regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
 
+    if(email.match(regex)){
+      mail.style.display = "none";
+      return true;
+    } else{
+      mail.style.display = "block";
+      mail.style.animation = "dongle 1s";
+      return false;
+    }
+  }
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    sendFeedback("template_izaa15i", {
-      name,
-      company,
-      phone,
-      email,
-      message,
-    });
+    if (name && isEmail() && message) {
+        
+      sendFeedback("template_izaa15i", {
+        name,
+        company,
+        phone,
+        email,
+        message,
+      });
+    } else { console.log("error !");}
   };
 
   const sendFeedback = (templateId, variables) => {
