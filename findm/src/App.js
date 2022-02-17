@@ -18,6 +18,9 @@ const App = () => {
     } else{
       mail.style.display = "block";
       mail.style.animation = "dongle 1s";
+      setTimeout(() =>{
+        mail.style.animation = "none";
+      }, 1000);
       return false;
     }
   }
