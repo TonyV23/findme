@@ -24,6 +24,14 @@ const App = () => {
       return false;
     }
   }
+
+  const failMessage = () =>{
+    let formMess = document.querySelector(".form-message");
+    formMess.innerHTML = "please fill in the required fields *";
+    formMess.style.opacity = "1";
+    formMess.style.background = "rgb(253,87,87)";    
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -36,7 +44,9 @@ const App = () => {
         email,
         message,
       });
-    } else { console.log("error !");}
+    } else { 
+      failMessage();
+    }
   };
 
   const sendFeedback = (templateId, variables) => {
