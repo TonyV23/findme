@@ -25,9 +25,10 @@ const App = () => {
     }
   }
 
-  const failMessage = () =>{
+  const failMessage = (message) =>{
     let formMess = document.querySelector(".form-message");
-    formMess.innerHTML = "please fill in the required fields *";
+    
+    formMess.innerHTML = message;
     formMess.style.opacity = "1";
     formMess.style.background = "rgb(253,87,87)";
     
@@ -38,12 +39,26 @@ const App = () => {
 
   }
 
+  const successMessage = () =>{
+    let formMess = document.querySelector(".form-message");
+    
+    formMess.innerHTML = "Message sent successfully";
+    formMess.style.opacity = "#00c1ec";
+    formMess.style.background = "green";
+
+    document.getElementById("name").classList.remove("error");
+    document.getElementById("email").classList.remove("error");
+    document.getElementById("message").classList.remove("error");
+
+    setTimeout(() => { formMess.style.opacity = "0";}, 5000);
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
     if (name && isEmail() && message) {
         
-      sendFeedback("template_izaa15i", {
+      sendFeedback("template_x42ecrf", {
         name,
         company,
         phone,
@@ -51,7 +66,7 @@ const App = () => {
         message,
       });
     } else { 
-      failMessage();
+      failMessage("Please fill required fields *");
     }
   };
 
@@ -60,17 +75,14 @@ const App = () => {
     window.emailjs
       .send("gmail", templateId, variables)
       .then((res) => {
-        console.log('success !');
+        successMessage();
         setName("");
         setCompany("");
         setPhone("");
         setEmail("");
         setMessage("");
       })
-      .catch(
-        (err) =>
-          document.querySelector('.form-message').innerHTML =
-            "An error has occurred. Please try again.")
+      .catch( (err) => failMessage("An error has occurred. Please try again."));
   };
 
   return (
