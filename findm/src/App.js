@@ -29,7 +29,13 @@ const App = () => {
     let formMess = document.querySelector(".form-message");
     formMess.innerHTML = "please fill in the required fields *";
     formMess.style.opacity = "1";
-    formMess.style.background = "rgb(253,87,87)";    
+    formMess.style.background = "rgb(253,87,87)";
+    
+    // to change the color of fields when its empty ... with the error class
+    document.getElementById("name").classList.add("error");
+    document.getElementById("email").classList.add("error");
+    document.getElementById("message").classList.add("error");
+
   }
 
   const handleSubmit = (e) => {
